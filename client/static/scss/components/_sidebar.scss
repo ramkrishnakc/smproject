@@ -1,0 +1,93 @@
+$sidebar-width: 201px;
+$sidebar-width-collapsed: 55px;
+$sidebar-height: 100%;
+$sidebar-logo-item-height: 61px;
+$sidebar-logo-item-width: 100%;
+$sidebar-logo-left-padding: 20px;
+
+.sidebar {
+  width: $sidebar-width;
+  height: $sidebar-height;
+  position: fixed;
+  background-color: $sidebar-bg-color;
+  z-index: 101;
+  -webkit-transition: width 0.5s; /* Safari */
+  transition: width 0.5s;
+  .logo {
+    height: $sidebar-logo-item-height;
+    // width: $sidebar-logo-item-width;
+    background-color: $sidebar-logo-bg-color;
+    padding: 17px 20px 20px 12px;
+    img {
+      height: 27px;
+    }
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    display: inline-flex;
+    min-width: 100%;
+    height: 46px;
+    color: $sidebar-item-text-color;
+    cursor: pointer;
+    &.active {
+      color: $sidebar-active-item-text-color;
+      background: $sidebar-active-item-bg-color;
+    }
+    &:hover {
+      color: $sidebar-active-item-text-color;
+      background: $sidebar-item-hover-bg-color;
+    }
+    .menu-icon-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 55px;
+    }
+    .menu-text-container {
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+  }
+}
+
+.sidebar-toggler {
+  width: 2px;
+  height: $sidebar-height;
+  position: fixed;
+  background-color: #00f6ff;
+  color: #393d54;
+  opacity: 0;
+  z-index: 101;
+  margin-left: $sidebar-width;
+  display: flex;
+  align-items: center;
+  -webkit-transition: margin-left 0.5s; /* Safari */
+  transition: margin-left 0.5s;
+}
+
+.sidebar-toggler:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.collapsed-sidebar {
+  .sidebar {
+    width: $sidebar-width-collapsed;
+    overflow: hidden;
+    .logo {
+      width: $sidebar-width;
+    }
+  }
+  .sidebar-toggler {
+    margin-left: $sidebar-width-collapsed;
+  }
+}

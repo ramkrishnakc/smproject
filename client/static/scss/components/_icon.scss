@@ -1,0 +1,36 @@
+.circle-icon-container {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    .circle-icon {
+        display: flex;
+        width: 24px;
+        height: 24px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 13px;
+        margin-right: 5px;
+        color: white;
+        background-color: #535876;
+        font-size: 13px;
+        margin-right: 12px;
+    }
+}
+
+.right-label-icon-container{
+    display: inline-flex;
+    cursor: pointer;
+    align-items: center;
+    .right-label-icon{
+        display: flex;
+        align-items: center;
+        font-size: 21px;
+        color: #535876;
+        margin-right: 12px;
+    }
+}
+
+.fa-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
