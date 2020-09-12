@@ -13,3 +13,8 @@ This is a private repository. A school management project.
   - sudo npm install (root permission is required, 'sudo' is not required in windows)
   - sudo npm run rundev (This command will run the project, 'sudo' is not required in windows)
   - Go to browser and 'https://localhost:8443'
+
+  # How to start working on project
+  - Create a git branch
+  - Work and make changes in your branch
+  - Then, send pull request to 'master' branch from your working branch
