@@ -1,0 +1,29 @@
+.breadcrumb-wrapper {
+  ul {
+    margin: 0px;
+    padding: 0px;
+  }
+  ul.breadcrumb {
+    list-style: none;
+  }
+  ul.breadcrumb li {
+    display: inline;
+  }
+  ul.breadcrumb li+li:before {
+    padding-left: 8px;
+    color: #393d54;
+    content: "/\00a0";
+  }
+  li.link-available {
+    font-size: 22px;
+    a {
+      text-decoration: none;
+    }
+  }
+  li.link-available:hover {
+    cursor: pointer;
+  }
+  li a:hover {
+    color: orange;
+  }
+}

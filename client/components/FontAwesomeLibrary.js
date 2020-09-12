@@ -48,6 +48,8 @@ import {
   faSortDown,
   faChevronRight as fasChevronRight,
   faChevronDown as fasChevronDown,
+  faPlusCircle,
+  faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faSquare,
@@ -114,6 +116,8 @@ const initFontAwesomeLibrary = () => {
     faFailedCircle,
     faClone,
     faLightbulb,
+    faPlusCircle,
+    faUserPlus,
   ].forEach((icon) => {
     library.add(icon);
   });

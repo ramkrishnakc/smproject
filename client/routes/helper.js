@@ -1,7 +1,7 @@
 import Dashboard from '../containers/dashboard';
 import User from '../containers/user';
-import CreateUser from '../containers/user/create-user';
-import ManageUser from '../containers/user/manage-user';
+import CreateUser from '../containers/user/create';
+import ManageUser from '../containers/user/manage';
 import NotFound from '../containers/404';
 import Profile from '../containers/profile';
 
@@ -25,7 +25,18 @@ const modules = [
       component: ManageUser,
     },
     name: 'manage-user',
-    text: 'Manage Users',
+    breadCrumb: [
+      {
+        label: 'Users',
+        path: '/users',
+        className: 'link-available',
+        title: 'Go to Users page',
+      },
+      {
+        label: 'Manage',
+        title: 'You are at Manage Users page',
+      },
+    ],
     roles: ['admin'],
   },
   {
@@ -35,7 +46,18 @@ const modules = [
       component: CreateUser,
     },
     name: 'create-user',
-    text: 'Create Users',
+    breadCrumb: [
+      {
+        label: 'Users',
+        path: '/users',
+        className: 'link-available',
+        title: 'Go to Users page',
+      },
+      {
+        label: 'Create',
+        title: 'You are at Create Users page',
+      },
+    ],
     roles: ['admin'],
   },
   {
@@ -76,8 +98,8 @@ const allowed = (list, role) => list.indexOf(role) > -1;
 const filterRoutes = (itemsArray, role) =>
   itemsArray
     .filter((item) => allowed(item.roles, role))
-    .map(({name, text, icon, routeProps, nestedRoutes}) => {
-      const obj = {name, text, icon, routeProps};
+    .map(({name, text, icon, breadCrumb, routeProps, nestedRoutes}) => {
+      const obj = {name, text, icon, breadCrumb, routeProps};
       if (nestedRoutes) {
         obj.nestedRoutes = filterRoutes(nestedRoutes, role);
       }

@@ -26,7 +26,6 @@ const NavBar = (props) => (
 );
 
 NavBar.propTypes = {
-  // title: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   logout: PropTypes.func.isRequired,
   navigateProfile: PropTypes.func.isRequired,

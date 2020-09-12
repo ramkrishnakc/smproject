@@ -1,0 +1,39 @@
+.quick-tile-section {
+  margin-bottom: 50px;
+  margin-right: 43px;
+  .tile-section {
+    flex-wrap: wrap;
+    a {
+      text-decoration: none;
+    }
+    .quick-action-tile {
+      cursor: pointer;
+      border-radius: 2px;
+      background-color: rgb(255, 255, 255);
+      opacity: 0.902;
+      width: 196px;
+      height: 105px;
+      font-size: 21px;
+      color: rgb(134, 138, 159);
+      font-size: 11px;
+      margin-right: 7px;
+      margin-bottom: 7px;
+      flex-direction: column;
+      text-transform: uppercase;
+      font-weight: bold;
+      .tile-icon {
+        margin-bottom: 5px;
+        font-size: 21px;
+      }
+    }
+    .selected-tile {
+      border: 1px dashed;
+      opacity: 1;
+    }
+    .quick-action-tile:hover {
+      color: rgb(83, 88, 118);
+      opacity: 1;
+      box-shadow: 1.5px 2.598px 3px 0px rgba(18, 18, 19, 0.06);
+    }
+  }
+}

@@ -7,6 +7,7 @@ import getSideBarItemsAndRouteModules from './helper';
 import NavBarComponent from '../components/Navbar';
 import SideBarComponent from '../components/Sidebar';
 import LoginComponent from '../containers/login';
+import Wrapper from './component';
 
 class App extends React.Component {
   getRoutes = (routeModules) => {
@@ -17,7 +18,11 @@ class App extends React.Component {
             key={module.name}
             exact={module.routeProps.exact}
             path={module.routeProps.path}
-            render={() => <module.routeProps.component title={module.text} />}
+            render={() => (
+              <Wrapper title={module.text} breadCrumb={module.breadCrumb}>
+                <module.routeProps.component />
+              </Wrapper>
+            )}
           />
         ))}
         <Redirect from="*" to="/404" />
@@ -35,7 +40,6 @@ class App extends React.Component {
       <div className={`${sidebarCollapsed ? 'collapsed-sidebar' : ''}`}>
         <HashRouter>
           <NavBarComponent
-            // title={this.state.title}
             username={username}
             logout={() => {}}
             navigateProfile={() => <Link to="/profile" />}
