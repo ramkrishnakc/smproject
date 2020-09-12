@@ -14,24 +14,20 @@
     ],
     "ignore": []
   },
-  "alternat_scripts": {
-    "start": "npm run prod",
-    "build": "npm-run-all clean transpile",
-    "server": "node ./dist-server/bin/www",
-    "dev": "NODE_ENV=development npm-run-all build server",
-    "prod": "NODE_ENV=production npm-run-all build server",
-    "transpile": "babel ./server --out-dir dist-server",
-    "clean": "rimraf dist-server"
-  },
   "scripts": {
+    "buildDev": "rm -rf dist && webpack --mode development --config webpack.server.config.js && webpack --mode development --config webpack.dev.config.js",
+    "buildProd": "rm -rf dist && webpack --mode production --config webpack.server.config.js && webpack --mode production --config webpack.prod.config.js",
+    "startServer": "NODE_ENV=development node ./dist/server.js",
     "build-dev": "webpack --config webpack.config__old.js",
-    "start": "npm run build-dev && nodemon --exec node_modules/.bin/babel-node ./server/index.js",
+    "start": "npm run buildDev && NODE_ENV=development nodemon --exec node_modules/.bin/babel-node ./server/index.js",
     "start-dev": "NODE_ENV=development node_modules/.bin/babel-node ./server/index.js",
     "startd": "nodemon ./server/index.js --exec babel-node --presets es2015,stage-2",
     "dev": "webpack-dev-server --config ./webpack.config.js --hot --inline --progress",
     "build": "BABEL_ENV=production webpack -p --config webpack.config.production.js",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha  -w --opts ./mocha.opts './tests/**/*.spec.js'",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "builddev": "rm -rf dist && webpack --config webpack.dev.config.js",
+    "rundev":  "npm run builddev && NODE_ENV=development nodemon --exec node_modules/.bin/babel-node ./server/index.js"
   },
   "keywords": [
     "school",
@@ -41,10 +37,11 @@
     "node",
     "express",
     "react",
+    "react-router",
     "redux",
     "webpack"
   ],
-  "author": "@Ramkrishna",
+  "author": "@ramkrishna",
   "license": "ISC",
   "dependencies": {
     "@babel/node": "^7.10.5",
@@ -53,6 +50,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.14.0",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/react-fontawesome": "^0.1.11",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
@@ -70,7 +68,10 @@
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "spdy": "^4.0.2",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
@@ -92,6 +93,7 @@
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-import-resolver-babel-module": "^5.1.2",
+    "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-prettier": "^3.1.4",
@@ -99,14 +101,18 @@
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.0",
     "file-loader": "^6.0.0",
+    "html-loader": "^1.3.0",
     "html-webpack-plugin": "^4.3.0",
     "mini-css-extract-plugin": "^0.10.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
     "prettier": "^2.1.1",
     "react-hot-loader": "^4.12.21",
     "sass-loader": "^9.0.3",
     "style-loader": "^1.2.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack-node-externals": "^2.5.2"
   }
 }

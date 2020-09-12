@@ -1,6 +1,8 @@
 import log4js from 'log4js';
+import fs from 'fs';
 
-const stringAppendForAuditLog = 'SchoolManagementApp; SchoolManagementApp; type=audit_log; ';
+const stringAppendForAuditLog =
+  'SchoolManagementApp; SchoolManagementApp; type=audit_log; ';
 
 const layout = {
   type: 'pattern',
@@ -21,7 +23,7 @@ const categoryObject = (category, type, level) => ({
 });
 
 /* Get configuration object for Logger */
-const getLoggerConfig = logDirectory => ({
+const getLoggerConfig = (logDirectory) => ({
   appenders: {
     console: {
       type: 'console',
@@ -39,8 +41,16 @@ const getLoggerConfig = logDirectory => ({
   },
 });
 
+const makeDirectory = (folderPath) => {
+  try {
+    if (!fs.existsSync(folderPath)) {
+      fs.mkdirSync(folderPath);
+    }
+  } catch (e) {} // eslint-disable-line no-empty
+};
 export default class Logger {
   constructor(args = {}) {
+    makeDirectory(args.logDirectory); // Make log directory if doesn't exists
     const loggerConfig = getLoggerConfig(args.logDirectory);
     log4js.configure(loggerConfig);
 
@@ -67,7 +77,7 @@ export default class Logger {
             let newStr = '';
             newStr += stringAppendForAuditLog;
             const keys = Object.keys(item);
-            keys.forEach(key => {
+            keys.forEach((key) => {
               if (key !== 'type') {
                 newStr += `${key}=${item[key]}; `;
               }

@@ -1,14 +1,15 @@
-import { MY_ACTION } from '../actions/types'
-const INITIAL_STATE = {
-  a_property: "somevalue"
-}
+import {MY_ACTION} from '../actions/types';
 
-export default function(state = INITIAL_STATE, action) {
-  switch(action.type){
+const INITIAL_STATE = {
+  a_property: 'somevalue',
+};
+
+const reducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
     case MY_ACTION:
-      return Object.assign({}, action.payload)
+      return {...action.payload};
     default:
-      return state
+      return state;
   }
-  return state
-}
+};
+export default reducer;

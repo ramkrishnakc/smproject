@@ -1,14 +1,15 @@
 import path from 'path';
 
 const rootPath = path.normalize(`${__dirname}/../../`);
-const publicPath = path.resolve(rootPath, 'static');
-const serverPath = path.resolve(rootPath, 'server');
-const indexHtmlPath = path.resolve(rootPath, 'client', 'index.html');
+const publicPath = path.join(rootPath, 'dist');
+const serverPath = path.join(rootPath, 'server');
+const indexHtmlPath = path.join(publicPath, 'index.html');
 
-// const indexHtmlPath = path.resolve(rootPath, 'static', 'index.html');
-const certDirectory = process.env.CERTIFICATE_LOCATION || path.resolve(serverPath, 'certs');
-const logDirectory = process.env.LOGFILE_LOCATION || path.resolve(rootPath, 'logs');
-const schemaDirectory = path.resolve(serverPath, 'schema');
+const certDirectory =
+  process.env.CERTIFICATE_LOCATION || path.join(serverPath, 'certs');
+const logDirectory =
+  process.env.LOGFILE_LOCATION || path.join(rootPath, 'logs');
+const schemaDirectory = path.join(serverPath, 'schema');
 const dbName = 'schoolManagement';
 
 export default {

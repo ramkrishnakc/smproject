@@ -31,6 +31,7 @@
     "mscConfirm": true
   },
   "rules": {
+    "no-async-promise-executor": "off",
     "no-underscore-dangle": "off",
     "promise/always-return": "error",
     "promise/no-return-wrap": "error",
@@ -40,6 +41,7 @@
     "promise/no-promise-in-callback": "warn",
     "promise/no-callback-in-promise": "warn",
     "promise/avoid-new": "off",
+    
     "import/no-extraneous-dependencies": [
       "error",
       {

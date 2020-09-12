@@ -1,8 +1,7 @@
-
 const read = () => {};
-const create = () => { };
-const remove = () => { };
-const update = () => { };
+const create = () => {};
+const remove = () => {};
+const update = () => {};
 
 export default {
   read,

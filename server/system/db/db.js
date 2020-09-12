@@ -1,10 +1,10 @@
-require('../global');
-
 import mongoose from 'mongoose';
 import fs from 'fs';
 import path from 'path';
 
 import {capitalizeFirstLetter} from '../../utils';
+
+require('../global');
 
 export default class Db {
   constructor(args) {
@@ -20,9 +20,12 @@ export default class Db {
   connect() {
     return new Promise(async (resolve, reject) => {
       try {
-        this.connection = await mongoose.connect(this.args.url, this.args.options);
+        this.connection = await mongoose.connect(
+          this.args.url,
+          this.args.options
+        );
         return resolve();
-      } catch(err) {
+      } catch (err) {
         return reject(err);
       }
     });
@@ -35,16 +38,19 @@ export default class Db {
           return reject(err);
         }
 
-        const listOfSchema = files.map(file => {
+        const listOfSchema = files.map((file) => {
           const modelName = Db.fileNameToModelName(file);
           const mName = modelName.toLowerCase();
           return {
             modelName,
             model: this.connection.model(
               modelName,
-              new mongoose.Schema((require(path.join(this.args.schemaDirectory, mName))).default),
+              new mongoose.Schema(
+                // eslint-disable-next-line global-require, import/no-dynamic-require
+                require(path.join(this.args.schemaDirectory, mName)).default
+              ),
               mName
-            )
+            ),
           };
         });
         this.schemas = listOfSchema || [];

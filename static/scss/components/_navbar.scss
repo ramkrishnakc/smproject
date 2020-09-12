@@ -1,0 +1,42 @@
+.navigation-bar {
+  display: inline-flex;
+  position: fixed;
+  width: 100%;
+  background-color: $navigationbar-bg-color;
+  height: $sidebar-logo-item-height;
+  padding-left: $sidebar-width + 40px;
+  padding-right: 30px;
+  align-items: center;
+  font-size: 13px;
+  color: #535876;
+  z-index: 100;
+  
+  .section-title {
+    flex-grow: 1;
+    font-size: 24px;
+    margin-bottom: 45px;
+    color: #535876;
+    padding-top: 45px;
+  }
+  
+  .action-items-container {
+    margin-right: $sidebar-width + 40px + 31px;
+    display: inline-flex;
+    .circle-icon-container {
+      margin-right: 30px;
+    }
+    a {
+      text-decoration: none;
+      color: #535876;
+    }
+  }
+}
+
+.collapsed-sidebar {
+  .navigation-bar {
+    padding-left: $sidebar-width-collapsed + 40px;
+    .action-items-container {
+      margin-right: $sidebar-width - 40px - 27px;
+    }
+  }
+}

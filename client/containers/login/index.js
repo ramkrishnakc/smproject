@@ -82,7 +82,7 @@ export class Login extends React.Component {
     }
   };
 
-  handlerLogin = (e) => {
+  handlerLogin = () => {
     const errorMsg = {};
     let isInvalid = true;
 
@@ -188,8 +188,8 @@ export class Login extends React.Component {
 
 Login.propTypes = {
   loginStart: PropTypes.func.isRequired,
-  checkToken: PropTypes.func.isRequired,
-  loginSuccess: PropTypes.func.isRequired,
+  // checkToken: PropTypes.func.isRequired,
+  // loginSuccess: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {

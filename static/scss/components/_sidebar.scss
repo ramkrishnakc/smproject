@@ -15,17 +15,21 @@ $sidebar-logo-left-padding: 20px;
   transition: width 0.5s;
   .logo {
     height: $sidebar-logo-item-height;
-    // width: $sidebar-logo-item-width;
     background-color: $sidebar-logo-bg-color;
-    padding: 17px 20px 20px 12px;
     img {
-      height: 27px;
+      padding-left: 6px;
+      width: 180px;
+      height: 90px;
+      margin-top: -15px;
     }
   }
   ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    a {
+      text-decoration: none;
+    }
   }
   li {
     display: inline-flex;

@@ -1,4 +1,3 @@
-
 import app from './app';
 import encryption from './encryption';
 import express from './express_config';

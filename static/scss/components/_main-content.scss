@@ -1,0 +1,35 @@
+.main-content {
+  padding-top: $sidebar-logo-item-height + 10px;
+  padding-right: 30px;
+  padding-bottom: 5rem;
+  padding-left: $sidebar-width + 40px;
+  background: $main-content-bg-color;
+  transition: padding-left 0.5s;
+  -webkit-transition: padding-left 0.5s;
+  .page-title {
+    font-size: 25px;
+    margin-bottom: 35px;
+    color: $page-title-text-color;
+  }
+  .title-middle {
+    font-size: 30px;
+    margin-bottom: 33px;
+    color: rgb(57, 61, 84);
+    padding-top: 33px;
+  }
+  .pull-right {
+    float: right;
+  }
+  .margin-top-negate-10 {
+    margin-top: -10px;
+  }
+  .padding-top-div {
+    padding-top: 30px;
+  }
+}
+
+.collapsed-sidebar {
+  .main-content {
+      padding-left: $sidebar-width-collapsed + 40px;
+  }
+}

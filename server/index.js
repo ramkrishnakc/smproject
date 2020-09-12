@@ -6,33 +6,55 @@ import fs from 'fs';
 import createDB from './system';
 import config from './config';
 
-const { logger, app: { certDirectory } } = config;
-const env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+const {
+  logger,
+  app: {certDirectory},
+} = config;
+const env = process.env.NODE_ENV || 'development';
 const serverConfig = config.server[env];
 const {httpPort, httpsPort, ip} = serverConfig;
 
+console.log('process.env.NODE_ENV ::: ', process.env.NODE_ENV);
+
 const app = express();
 
+// For 'development' mode
+if (env === 'development') {
+  const useDevServer = require('./dev-server').default; // eslint-disable-line global-require
+  useDevServer(app);
+}
+
 /* Handle the logs for server status */
-const handleServerStatusLog = (serverType, port, ip, err) => {
+const handleServerStatusLog = (serverType, port, err) => {
   if (err) {
     logger.error(`Could not start ${serverType} Server in port ${port}`);
     logger.trace(err.stack);
     return process.exit(1);
   }
-  return logger.info(`${serverType} Server started successfully at ${serverType.toLowerCase()}://${ip}:${port}`);
+  return logger.info(
+    `${serverType} Server started successfully at ${serverType.toLowerCase()}://${ip}:${port}`
+  );
 };
 
 const createHTTPServer = () =>
-  http.Server(app).listen(httpPort, ip, err => handleServerStatusLog('HTTP', httpPort, ip, err));
+  http
+    .Server(app)
+    .listen(httpPort, ip, (err) =>
+      handleServerStatusLog('HTTP', httpPort, err)
+    );
 
 const createHTTPsServer = () =>
   spdy
-    .createServer({
-      key: fs.readFileSync(`${certDirectory}/ssl.key`),
-      cert: fs.readFileSync(`${certDirectory}/ssl.crt`)
-    }, app)
-    .listen(httpsPort, ip, err => handleServerStatusLog('HTTPS', httpsPort, ip, err));
+    .createServer(
+      {
+        key: fs.readFileSync(`${certDirectory}/ssl.key`),
+        cert: fs.readFileSync(`${certDirectory}/ssl.crt`),
+      },
+      app
+    )
+    .listen(httpsPort, ip, (err) =>
+      handleServerStatusLog('HTTPS', httpsPort, err)
+    );
 
 const SERVER = {
   start: () => {
@@ -40,7 +62,7 @@ const SERVER = {
     config.express(app, config.app);
 
     // Configure routes
-    const routes = require('./routes');
+    const routes = require('./routes'); // eslint-disable-line global-require
     routes.default(app);
 
     // Finally start the server
@@ -52,7 +74,7 @@ const SERVER = {
 // Initialize Database then start the server
 createDB()
   .then(() => SERVER.start())
-  .catch(e => {
+  .catch((e) => {
     logger.error('Error while starting the Application....');
     logger.trace(e.stack);
   });

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FontAwesomeIcon from '../../components/FontAwesomeLibrary';
+import FontAwesomeIcon from './FontAwesomeLibrary';
 
 const CircleMenuIcon = ({name, icon, clickHandler, label}) => (
   <div
