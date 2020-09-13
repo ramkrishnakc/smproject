@@ -68,7 +68,9 @@ class App extends React.Component {
   };
 
   render() {
-    const {login: isLoggedIn} = this.props;
+    const {
+      login: {isLoggedIn},
+    } = this.props;
     return (
       <>{isLoggedIn ? this.getProtectedRoutes() : this.getPublicRoutes()}</>
     );

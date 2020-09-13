@@ -3,7 +3,7 @@ import http from 'http';
 import spdy from 'spdy';
 import fs from 'fs';
 
-import createDB from './system';
+import createDB, {insertUser} from './system';
 import config from './config';
 
 const {
@@ -14,7 +14,7 @@ const env = process.env.NODE_ENV || 'development';
 const serverConfig = config.server[env];
 const {httpPort, httpsPort, ip} = serverConfig;
 
-console.log('process.env.NODE_ENV ::: ', process.env.NODE_ENV);
+logger.info('process.env.NODE_ENV ::: ', process.env.NODE_ENV);
 
 const app = express();
 
@@ -74,6 +74,7 @@ const SERVER = {
 // Initialize Database then start the server
 createDB()
   .then(() => SERVER.start())
+  .then(() => insertUser())
   .catch((e) => {
     logger.error('Error while starting the Application....');
     logger.trace(e.stack);
