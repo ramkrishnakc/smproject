@@ -1,8 +1,11 @@
-import session from './session';
+import db from '../../db';
+import helperFunction from '../helper';
+
+const Lib = helperFunction(db.getModel('Session'));
 
 export default {
-  get: session.read,
-  post: session.create,
-  delete: session.remove,
-  put: session.update,
+  getOne: Lib.findOne,
+  post: Lib.create,
+  delete: Lib.deleteOne,
+  put: Lib.update,
 };

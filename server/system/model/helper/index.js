@@ -54,7 +54,7 @@ const helper = (Model) => ({
   // Update single item in collection
   update: (params) =>
     new Promise((resolve, reject) =>
-      Model.update(params.query, params.data, {multi: false})
+      Model.updateOne(params.query, params.data)
         .then((res) => resolve(res))
         .catch((err) => reject(err))
     ),
@@ -62,7 +62,7 @@ const helper = (Model) => ({
   // Update multiple items in collection
   updateMany: (params) =>
     new Promise((resolve, reject) =>
-      Model.update(params.query, params.data, {multi: true})
+      Model.updateMany(params.query, params.data)
         .then((res) => resolve(res))
         .catch((err) => reject(err))
     ),

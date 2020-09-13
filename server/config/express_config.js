@@ -2,8 +2,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import ejs from 'ejs';
 import cors from 'cors';
+import helmet from 'helmet';
 
 const expressConfig = (app, config) => {
+  app.use(helmet());
   app.use(cors());
   app.use(bodyParser.urlencoded({extended: true, limit: '10mb'}));
   app.use(bodyParser.json({limit: '10mb'}));

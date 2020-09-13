@@ -11,7 +11,7 @@ export const insertUser = () => {
 
   return User.getOne({
     query: {s_username: 'root_user'},
-    select: 's_username s_password s_role s_created_date _id',
+    select: 's_username s_password s_role s_createdDate _id',
   })
     .then((res) => {
       if (!res) {

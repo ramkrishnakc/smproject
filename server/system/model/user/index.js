@@ -1,8 +1,7 @@
 import db from '../../db';
 import helperFunction from '../helper';
 
-const UserModel = db.getModel('User');
-const Lib = helperFunction(UserModel);
+const Lib = helperFunction(db.getModel('User'));
 
 export default {
   get: Lib.find,

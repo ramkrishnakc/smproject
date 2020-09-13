@@ -1,24 +1,51 @@
-import userModel from '../../model/user';
+import UserModel from '../../model/user';
+import {sendSuccessResponse, sendErrorResponse} from '../helper';
+import config from '../../config';
 
+const {
+  encryption: {encrypt},
+} = config;
+
+/* Get the user */
+export const getUser = (query) => UserModel.getOne({query});
+
+/* Create new user for the application */
 const createUser = (req, res) => {
-  const {name} = req.body;
-  const {role} = req.body;
-  console.log('BODY :: ', req.body, req.params);
+  const {username, password, role} = req.body;
 
-  return userModel
-    .post({
+  if (username && password && role) {
+    return UserModel.post({
       data: {
-        s_name: name,
+        s_username: username,
+        s_password: encrypt(password),
         s_role: role,
       },
     })
-    .then(() => res.status(200).send('Success..'))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send('Failure.......');
-    });
+      .then(() =>
+        sendSuccessResponse(
+          res,
+          '',
+          `User: ${username} with role: ${role} is successfully created`
+        )
+      )
+      .catch((err) => sendErrorResponse({res, logMsg: err}));
+  }
+  return sendErrorResponse({
+    res,
+    code: 400,
+    message: 'Bad Parameters',
+    logMsg: 'Missing username or password or role in paylaod',
+  });
 };
+
+/* Update the user role or password */
+const updateUser = (req, res) => sendSuccessResponse(res);
+
+/* Remove the user from the application */
+const removeUser = (req, res) => sendSuccessResponse(res);
 
 export default {
   createUser,
+  updateUser,
+  removeUser,
 };

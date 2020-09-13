@@ -58,16 +58,16 @@ const createHTTPsServer = () =>
 
 const SERVER = {
   start: () => {
-    // Configure express server
-    config.express(app, config.app);
+    const middleware = require('./middleware').default; // eslint-disable-line global-require
+    middleware.useSession(app); // implement session
+    config.express(app, config.app); // Configure express server
+    middleware.useAuth(app); // implement authentication
 
-    // Configure routes
-    const routes = require('./routes'); // eslint-disable-line global-require
-    routes.default(app);
+    const routes = require('./routes').default; // eslint-disable-line global-require
+    routes(app); // Configure routes
 
-    // Finally start the server
-    createHTTPServer();
-    createHTTPsServer();
+    createHTTPServer(); // start HTTP server
+    createHTTPsServer(); // Finally start HTTPS server
   },
 };
 
