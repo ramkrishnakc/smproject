@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-// import Select from 'react-select';
 import {connect} from 'react-redux';
 // import {loginStart, checkToken, loginSuccess} from './loginModule';
 // import config from '../../config';
 // import authTypes from '../../static/auth_types.json';
 import FullScreenLoader from '../../components/FullScreenLoader';
+import Logo from '../../../static/images/logo.png';
+import FontAwesomeIcon from '../../components/FontAwesomeLibrary';
 
 export class Login extends React.Component {
   constructor(props) {
@@ -120,64 +121,45 @@ export class Login extends React.Component {
       <div className="login-page">
         <div className="login-form-wrapper">
           <div className="logo-container">
-            <img
-              src="img/login/director_console_logo.svg"
-              alt="director-console-logo"
-            />
+            <img src={Logo} alt="logo" />
           </div>
-          <div className="login-form">
-            <div className="flex horizontal-align-center">
-              <a href="/api/adfs/login" className="dc-hyperlink">
-                ADFS Sign In
-              </a>
-            </div>
-            <p className="message-seperator">or</p>
-            <div className="login-form">
-              <div className="input-field hide-clear-button">
-                {/* <Select
-                  disabled={false}
-                  id="auth_type"
-                  name="auth_type"
-                  className="auth_type"
-                  placeholder="Select Authentication Type"
-                  labelKey="value"
-                  value={this.state.authType}
-                  options={authTypes}
-                  onChange={this.selectHandler}
-                /> */}
-                {/* <label htmlFor="name">Select Authentication Type</label> */}
-              </div>
-              <div style={{position: 'relative'}}>
-                <input
-                  className="login-input username-input override-chrome-autofill-style"
-                  type="text"
-                  name="username"
-                  placeholder={this.state.placeholder.username}
-                  value={this.state.username}
-                  onChange={this.handler}
-                />
-                <span className="bg-image username-input-image" />
-              </div>
-              <div style={{position: 'relative'}}>
-                <input
-                  className="login-input password-input override-chrome-autofill-style"
-                  type="password"
-                  name="password"
-                  placeholder={this.state.placeholder.password}
-                  onChange={this.handler}
-                  onKeyPress={this.onKeyPress}
-                />
-                <span className="bg-image password-input-image" />
-              </div>
 
-              <button
-                type="button"
-                className="button submit-button"
-                onClick={this.handlerLogin}
-                value="Submit"
-              >
-                LOG IN
-              </button>
+          <div className="login-form">
+            <div className="login-input-wrapper">
+              <input
+                className="login-input"
+                type="text"
+                name="username"
+                placeholder={this.state.placeholder.username}
+                value={this.state.username}
+                onChange={this.handler}
+                autoComplete="off"
+              />
+              <FontAwesomeIcon icon="user" className="login-input-icon" />
+            </div>
+            <div className="login-input-wrapper">
+              <input
+                className="login-input"
+                type="password"
+                name="password"
+                placeholder={this.state.placeholder.password}
+                onChange={this.handler}
+                onKeyPress={this.onKeyPress}
+                autoComplete="off"
+              />
+              <FontAwesomeIcon icon="key" className="login-input-icon" />
+            </div>
+            <button
+              type="button"
+              className="button submit-button"
+              onClick={this.handlerLogin}
+              value="Submit"
+            >
+              LOG IN
+            </button>
+            <div className="forgot-password">
+              <FontAwesomeIcon icon="unlock-alt" />
+              <span className="span-label">Forgot Password ? </span>
             </div>
           </div>
         </div>

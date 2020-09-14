@@ -50,6 +50,7 @@ import {
   faChevronDown as fasChevronDown,
   faPlusCircle,
   faUserPlus,
+  faUnlockAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faSquare,
@@ -71,6 +72,7 @@ const initFontAwesomeLibrary = () => {
     faCog,
     faUsers,
     faKey,
+    faUnlockAlt,
     faUser,
     faSignOutAlt,
     faExclamationTriangle,
