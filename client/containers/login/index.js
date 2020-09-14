@@ -3,7 +3,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 // import {loginStart, checkToken, loginSuccess} from './loginModule';
 // import config from '../../config';
-// import authTypes from '../../static/auth_types.json';
 import FullScreenLoader from '../../components/FullScreenLoader';
 import Logo from '../../../static/images/logo.png';
 import FontAwesomeIcon from '../../components/FontAwesomeLibrary';
@@ -19,13 +18,7 @@ export class Login extends React.Component {
         username: 'Username',
         password: 'Password',
       },
-      active: {},
       loading: true,
-      authType: {
-        id: 1,
-        value: 'Director Console',
-        name: 'dc_auth',
-      },
     };
   }
 
@@ -77,12 +70,6 @@ export class Login extends React.Component {
     });
   };
 
-  selectHandler = (e) => {
-    if (e) {
-      this.setState({authType: e});
-    }
-  };
-
   handlerLogin = () => {
     const errorMsg = {};
     let isInvalid = true;
@@ -99,8 +86,8 @@ export class Login extends React.Component {
     if (!isInvalid) {
       this.setState({placeholder: errorMsg});
     } else {
-      const {username, password, authType} = this.state;
-      this.props.loginStart({username, password, authType: authType.name});
+      const {username, password} = this.state;
+      this.props.loginStart({username, password});
     }
   };
 
@@ -113,10 +100,13 @@ export class Login extends React.Component {
   render() {
     if (this.state.loading) {
       return (
-        <FullScreenLoader title="Loading Director Console" color="#2b3050" />
+        <FullScreenLoader
+          title="Loading School Management Software"
+          color="#4e517c"
+          loaderContainerColor="linear-gradient(to right, #7f90e8, #798bd5, #4e517c, #798bd5)"
+        />
       );
     }
-
     return (
       <div className="login-page">
         <div className="login-form-wrapper">
