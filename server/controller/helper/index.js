@@ -3,7 +3,7 @@ import config from '../../config';
 const {logger} = config;
 
 export const getErrorObject = (code, message, logMsg) => {
-  const errorObject = {sucess: false, message};
+  const errorObject = {success: false, message};
   // Log error if needed
   if (logMsg) {
     logger.error(logMsg);
@@ -45,7 +45,7 @@ export const sendErrorResponse = ({res, code = 500, message, logMsg}) =>
   res.status(code).send(getErrorObject(code, message, logMsg));
 
 export const sendSuccessResponse = (res, data, logMsg) => {
-  const successObject = {sucess: true};
+  const successObject = {success: true};
   if (data) {
     successObject.data = data;
   }

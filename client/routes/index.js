@@ -2,7 +2,9 @@ import React from 'react';
 import {HashRouter, Switch, Route, Link, Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {get} from 'lodash';
 
+import {handleAuth, logout} from '../containers/login/login.module';
 import getSideBarItemsAndRouteModules from './helper';
 import NavBarComponent from '../components/Navbar';
 import SideBarComponent from '../components/Sidebar';
@@ -10,6 +12,13 @@ import LoginComponent from '../containers/login';
 import Wrapper from './component';
 
 class App extends React.Component {
+  componentDidMount() {
+    const id = get(this.props, 'login.id');
+    if (id) {
+      this.props.handleAuth();
+    }
+  }
+
   getRoutes = (routeModules) => {
     return (
       <Switch>
@@ -41,7 +50,7 @@ class App extends React.Component {
         <HashRouter>
           <NavBarComponent
             username={username}
-            logout={() => {}}
+            logout={this.props.logout}
             navigateProfile={() => <Link to="/profile" />}
           />
           <SideBarComponent
@@ -68,30 +77,32 @@ class App extends React.Component {
   };
 
   render() {
-    const {
-      login: {isLoggedIn},
-    } = this.props;
+    const isLoggedIn = get(this.props, 'login.isLoggedIn');
     return (
       <>{isLoggedIn ? this.getProtectedRoutes() : this.getPublicRoutes()}</>
     );
   }
 }
 
-App.defaultProps = {
-  login: {
-    isLoggedIn: true,
-    role: 'admin',
-    username: 'ram',
-    sidebarCollapsed: false,
-  },
+App.propTypes = {
+  handleAuth: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
+  login: PropTypes.shape({
+    isLoggedIn: PropTypes.bool,
+    role: PropTypes.string,
+    username: PropTypes.string,
+    sidebarCollapsed: PropTypes.bool,
+  }).isRequired,
+};
+const mapStateToProps = (state) => ({
+  login: state.login,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleAuth: () => dispatch(handleAuth()),
+    logout: () => dispatch(logout()),
+  };
 };
 
-App.propTypes = {
-  login: PropTypes.shape(PropTypes.any),
-};
-export default connect(
-  (state) => ({
-    login: state.login,
-  }),
-  {}
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

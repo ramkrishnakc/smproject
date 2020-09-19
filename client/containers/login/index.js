@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-// import {loginStart, checkToken, loginSuccess} from './loginModule';
-// import config from '../../config';
+import {loginStart} from './login.module';
 import FullScreenLoader from '../../components/FullScreenLoader';
 import Logo from '../../../static/images/logo.png';
 import FontAwesomeIcon from '../../components/FontAwesomeLibrary';
@@ -21,40 +20,6 @@ export class Login extends React.Component {
       loading: true,
     };
   }
-
-  // componentWillMount() {
-  //   if (SERVER) {
-  //     return false;
-  //   }
-
-  //   const adfsData = this.props.location.query.adfs_data;
-  //   const {status, message} = this.props.location.query;
-  //   if (status === 'error') {
-  //     errorMsg(message);
-  //   }
-
-  //   if (adfsData) {
-  //     const decodedData = JSON.parse(window.atob(adfsData));
-  //     if (decodedData.authType === 'adfs_auth') {
-  //       this.props.loginSuccess(decodedData);
-  //     }
-  //   } else if (
-  //     window.localStorage.getItem('token') &&
-  //     this.props.location.pathname === '/' &&
-  //     !this.props.login.logout
-  //   ) {
-  //     const expiredDate = window.localStorage.getItem('expired-date');
-  //     if (expiredDate) {
-  //       const remainingHours =
-  //         Math.round(new Date() - new Date(expiredDate)) / 36e5;
-  //       if (remainingHours > config.tokenExpiredHours) {
-  //         this.setState({tokenNotExpired: false});
-  //         return false;
-  //       }
-  //     }
-  //     this.props.checkToken();
-  //   }
-  // }
 
   componentDidMount() {
     this.setState({loading: false});
@@ -98,12 +63,14 @@ export class Login extends React.Component {
   };
 
   render() {
-    if (this.state.loading) {
+    const showLoader =
+      this.state.loading || (this.props.login && this.props.login.loginStarted);
+    if (showLoader) {
       return (
         <FullScreenLoader
-          title="Loading School Management Software"
+          title="School Management Software"
           color="#4e517c"
-          loaderContainerColor="linear-gradient(to right, #7f90e8, #798bd5, #4e517c, #798bd5)"
+          loaderContainerColor="#4e517c"
         />
       );
     }
@@ -160,13 +127,17 @@ export class Login extends React.Component {
 
 Login.propTypes = {
   loginStart: PropTypes.func.isRequired,
-  // checkToken: PropTypes.func.isRequired,
-  // loginSuccess: PropTypes.func.isRequired,
+  login: PropTypes.objectOf.isRequired,
 };
 
-function mapStateToProps(state) {
-  const {login} = state;
-  return {login};
-}
+const mapStateToProps = (state) => ({
+  login: state.login,
+});
 
-export default connect(mapStateToProps, {})(Login);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginStart: (body) => dispatch(loginStart(body)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

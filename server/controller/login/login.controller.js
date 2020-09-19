@@ -23,12 +23,23 @@ const createSession = (id, role) =>
       .catch((err) => reject(err));
   });
 
+const loginSuccess = (req, res, data, sessId) => {
+  req.session.userID = data.username;
+  req.session.sessionID = sessId;
+  req.session.role = data.role;
+  return sendSuccessResponse(
+    res,
+    data,
+    `User: ${data.username}, role: ${data.role} has logged in successfully`
+  );
+};
+
 /* Login function */
 const login = (req, res) => {
   const {username, password} = req.body;
   if (username && password) {
     return getUser({s_username: username})
-      .then((user) => {
+      .then(async (user) => {
         if (user) {
           if (user.s_password === encrypt(password)) {
             const data = {
@@ -36,18 +47,21 @@ const login = (req, res) => {
               role: user.s_role,
               id: user._id,
             };
-            // Create the session and send success response
+
+            const sessionData = await Session.getOne({
+              query: {s_userID: username},
+            });
+
+            // Session exists in DB
+            if (sessionData) {
+              return loginSuccess(req, res, data, sessionData._id);
+            }
+
+            // Create the session in DB
             return createSession(username, user.s_role)
               .then((sessionID) => {
                 if (sessionID) {
-                  req.session.userID = username;
-                  req.session.sessionID = sessionID;
-                  req.session.role = user.s_role;
-                  return sendSuccessResponse(
-                    res,
-                    data,
-                    `User: ${username}, role: ${user.s_role} logged in successfully`
-                  );
+                  return loginSuccess(req, res, data, sessionID);
                 }
                 return sendErrorResponse({
                   res,

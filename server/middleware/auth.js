@@ -76,8 +76,6 @@ const useAuth = (app) => {
           if (session) {
             return sendSuccessResponse(res, {
               isValid: true,
-              role: req.session.role,
-              username: req.session.userID,
             });
           }
           return sendErrorResponse({

@@ -19,7 +19,7 @@ export const insertUser = () => {
         return User.post({
           data: {
             s_username: 'root_user',
-            s_password: '1c4ac81abf5c31290db22e4c3b46ccd0', // pwd: doitnow*ucker
+            s_password: '58264aceec9c195ada654682ddc7d6c9', // changeme (1c4ac81abf5c31290db22e4c3b46ccd0 = doitnow*ucker)
             s_role: 'admin',
           },
         });

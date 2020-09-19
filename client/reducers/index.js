@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import myActionReducer from './myActionReducer';
+import loginReducer from '../containers/login/login.module';
 
 const rootReducer = combineReducers({
-  myState: myActionReducer,
+  login: loginReducer,
 });
 
 export default rootReducer;
