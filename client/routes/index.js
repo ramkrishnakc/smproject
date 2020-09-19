@@ -56,7 +56,6 @@ class App extends React.Component {
           <SideBarComponent
             sidebarCollapsed={sidebarCollapsed}
             menuItems={menuItems}
-            openAppInfo={() => {}}
             toggleSidebar={() => {}}
           />
           {routesArray}

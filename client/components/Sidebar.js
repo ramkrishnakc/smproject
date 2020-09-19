@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
+import Popup from 'react-poppop';
 import FontAwesomeIcon from './FontAwesomeLibrary';
 import Logo from '../../static/images/logo.png';
 
@@ -52,6 +53,7 @@ RenderItems.propTypes = {
 // Sidebar component
 const Sidebar = (props) => {
   const [active, setActiveStatus] = useState('dashboard');
+  const [openPopup, handlePopup] = useState(false);
 
   useEffect(() => {
     const location = window.location.href.split('/#/')[1];
@@ -63,7 +65,7 @@ const Sidebar = (props) => {
     }
   });
 
-  const {sidebarCollapsed, menuItems, openAppInfo, toggleSidebar} = props;
+  const {sidebarCollapsed, menuItems, toggleSidebar} = props;
   return (
     <>
       <div className="sidebar">
@@ -74,7 +76,7 @@ const Sidebar = (props) => {
               alt="logo"
               name="logo"
               role="presentation"
-              onClick={openAppInfo}
+              onClick={() => handlePopup(true)}
             />
           </div>
           <ul>
@@ -99,6 +101,24 @@ const Sidebar = (props) => {
           icon={sidebarCollapsed ? 'angle-right' : 'angle-left'}
         />
       </div>
+      <Popup
+        position="centerCenter"
+        open={openPopup}
+        closeOnEsc
+        onClose={() => handlePopup(false)}
+        contentStyle={{
+          borderRadius: '0px',
+          padding: '0px',
+        }}
+      >
+        <div className="info-wrapper">
+          <h3>School Management Software</h3>
+          <div>
+            <img src={Logo} alt="logo" name="logo" role="presentation" />
+          </div>
+          <div>@Copyright 2019</div>
+        </div>
+      </Popup>
     </>
   );
 };
@@ -112,7 +132,6 @@ Sidebar.propTypes = {
     })
   ).isRequired,
   sidebarCollapsed: PropTypes.bool.isRequired,
-  openAppInfo: PropTypes.func.isRequired,
   toggleSidebar: PropTypes.func.isRequired,
 };
 
