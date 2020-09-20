@@ -1,20 +1,21 @@
-import UserModel from '../../model/user';
+import Model from '../../model';
 import {sendSuccessResponse, sendErrorResponse} from '../helper';
 import config from '../../config';
 
+const User = Model.user;
 const {
   encryption: {encrypt},
 } = config;
 
 /* Get the user */
-export const getUser = (query) => UserModel.getOne({query});
+export const getUser = (query) => User.getOne({query});
 
 /* Create new user for the application */
 const createUser = (req, res) => {
   const {username, password, role} = req.body;
 
   if (username && password && role) {
-    return UserModel.post({
+    return User.post({
       data: {
         s_username: username,
         s_password: encrypt(password),

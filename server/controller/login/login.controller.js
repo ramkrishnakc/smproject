@@ -1,8 +1,9 @@
 import {sendSuccessResponse, sendErrorResponse} from '../helper';
 import config from '../../config';
 import {getUser} from '../user/user.controller';
-import Session from '../../model/session';
+import Model from '../../model';
 
+const Session = Model.session;
 const {
   encryption: {encrypt},
 } = config;

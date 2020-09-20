@@ -1,8 +1,9 @@
 import Mongoose from 'mongoose';
-import Session from '../model/session';
+import Model from '../model';
 import config from '../config';
 import {sendSuccessResponse, sendErrorResponse} from '../controller/helper';
 
+const Session = Model.session;
 const {logger} = config;
 const {ObjectId} = Mongoose.Types;
 
