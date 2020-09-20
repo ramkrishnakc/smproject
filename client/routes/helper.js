@@ -5,87 +5,138 @@ import ManageUser from '../containers/user/manage';
 import NotFound from '../containers/404';
 import Profile from '../containers/profile';
 
+import Admission from '../containers/admission';
+import Assignment from '../containers/assignment';
+import Attendance from '../containers/attendance';
+import Calendar from '../containers/calendar';
+import Fee from '../containers/fee';
+import Homework from '../containers/homework';
+import Hr from '../containers/hr';
+import Leave from '../containers/leave';
+import Library from '../containers/library';
+import Notice from '../containers/notice';
+import Payroll from '../containers/payroll';
+
+const getRouteProps = (path, component, exact) => ({
+  path,
+  exact,
+  component,
+});
+
+const getSidebar = (name, text, icon) => ({
+  name, // key used in route
+  text, // Title of page as well as Label in sidebar
+  icon, // Icon for sidebar
+  sidebar: true, // Display in sidebar
+});
+
+const getBreadCrumb = (parents, label, pageName) => {
+  const breadCrumb = [];
+
+  parents.forEach((item) => {
+    breadCrumb.push({
+      label: item.label,
+      path: item.path,
+      className: 'link-available',
+      title: `Go to ${item.label} page`,
+    });
+  });
+  breadCrumb.push({label, title: `You are at ${pageName} page`});
+  return breadCrumb;
+};
+
+const userAsParent = [{label: 'Users', path: '/users'}];
+
+// This list is for the routes in UI
 const modules = [
   {
-    routeProps: {
-      path: '/',
-      exact: true,
-      component: Dashboard,
-    },
-    name: 'dashboard',
-    text: 'Dashboard',
-    icon: 'tachometer-alt',
-    roles: ['admin'],
-    sidebar: true,
-  },
-  {
-    routeProps: {
-      path: '/users/manage',
-      exact: true,
-      component: ManageUser,
-    },
-    name: 'manage-user',
-    breadCrumb: [
-      {
-        label: 'Users',
-        path: '/users',
-        className: 'link-available',
-        title: 'Go to Users page',
-      },
-      {
-        label: 'Manage',
-        title: 'You are at Manage Users page',
-      },
-    ],
+    routeProps: getRouteProps('/', Dashboard, true),
+    ...getSidebar('dashboard', 'Dashboard', 'tachometer-alt'),
     roles: ['admin'],
   },
+  /** *-------------------- * * ---------------------* */
   {
-    routeProps: {
-      path: '/users/create',
-      exact: true,
-      component: CreateUser,
-    },
-    name: 'create-user',
-    breadCrumb: [
-      {
-        label: 'Users',
-        path: '/users',
-        className: 'link-available',
-        title: 'Go to Users page',
-      },
-      {
-        label: 'Create',
-        title: 'You are at Create Users page',
-      },
-    ],
-    roles: ['admin'],
-  },
-  {
-    routeProps: {
-      path: '/users',
-      exact: true,
-      component: User,
-    },
-    name: 'users',
-    text: 'Users',
-    icon: 'users',
+    routeProps: getRouteProps('/admission', Admission, true),
+    ...getSidebar('admission', 'Admission', 'university'),
     roles: ['admin', 'root'],
-    sidebar: true,
   },
   {
-    routeProps: {
-      path: '/profile',
-      component: Profile,
-    },
+    routeProps: getRouteProps('/assignment', Assignment, true),
+    ...getSidebar('assignment', 'Assignment', 'tasks'),
+    roles: ['admin', 'root'],
+  },
+  {
+    routeProps: getRouteProps('/attendance', Attendance, true),
+    ...getSidebar('attendance', 'Attendance', ['far', 'clock']),
+    roles: ['admin', 'root'],
+  },
+  {
+    routeProps: getRouteProps('/calendar', Calendar, true),
+    ...getSidebar('calendar', 'Calendar', ['far', 'calendar-alt']),
+    roles: ['admin', 'root'],
+  },
+  {
+    routeProps: getRouteProps('/fee', Fee, true),
+    ...getSidebar('fee', 'Fee & Payment', 'receipt'),
+    roles: ['admin', 'root'],
+  },
+  {
+    routeProps: getRouteProps('/homework', Homework, true),
+    ...getSidebar('homework', 'Homework', 'chalkboard-teacher'),
+    roles: ['admin', 'root'],
+  },
+  {
+    routeProps: getRouteProps('/hr', Hr, true),
+    ...getSidebar('hr', 'HR Section', 'people-carry'),
+    roles: ['admin', 'root'],
+  },
+  {
+    routeProps: getRouteProps('/leave', Leave, true),
+    ...getSidebar('leave', 'Leave', 'user-clock'),
+    roles: ['admin', 'root'],
+  },
+  {
+    routeProps: getRouteProps('/library', Library, true),
+    ...getSidebar('library', 'Library', 'book-reader'),
+    roles: ['admin', 'root'],
+  },
+  {
+    routeProps: getRouteProps('/notice', Notice, true),
+    ...getSidebar('notice', 'Notice', 'exclamation-circle'),
+    roles: ['admin', 'root'],
+  },
+  {
+    routeProps: getRouteProps('/payroll', Payroll, true),
+    ...getSidebar('payroll', 'Payroll', 'money-check-alt'),
+    roles: ['admin', 'root'],
+  },
+  /** *---------------------- * Users * -------------------* */
+  {
+    routeProps: getRouteProps('/users/manage', ManageUser, true),
+    breadCrumb: getBreadCrumb(userAsParent, 'Manage', 'Manage Users'),
+    name: 'manage-user',
+    roles: ['admin'],
+  },
+  {
+    routeProps: getRouteProps('/users/create', CreateUser, true),
+    breadCrumb: getBreadCrumb(userAsParent, 'Manage', 'Manage Users'),
+    name: 'create-user',
+    roles: ['admin'],
+  },
+  {
+    routeProps: getRouteProps('/users', User, true),
+    ...getSidebar('users', 'Users', 'users'),
+    roles: ['admin', 'root'],
+  },
+  /**/
+  {
+    routeProps: getRouteProps('/profile', Profile),
     name: 'profile',
     text: 'Profile',
     roles: ['admin'],
   },
   {
-    routeProps: {
-      path: '/404',
-      component: NotFound,
-    },
+    routeProps: getRouteProps('/404', NotFound),
     name: 'notFound',
     roles: ['admin'],
   },

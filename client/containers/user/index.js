@@ -1,8 +1,7 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-import QuickIconTile from '../../components/IconTile';
+import PageList from '../../components/PageList';
 
-const ENTITY_LIST = [
+const itemsList = [
   {
     label: 'Create',
     link: '/users/create',
@@ -11,24 +10,9 @@ const ENTITY_LIST = [
   {
     label: 'Manage',
     link: '/users/manage',
-    icon: 'cogs',
+    icon: 'users-cog',
   },
 ];
 
-const User = () => {
-  return (
-    <div className="flex">
-      <div className="row quick-tile-section">
-        <div className="flex tile-section">
-          {ENTITY_LIST.map((entity) => (
-            <QuickIconTile key={entity.label} {...entity} />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-User.propTypes = {
-  // title: PropTypes.string.isRequired,
-};
+const User = () => <PageList itemsList={itemsList} />;
 export default User;

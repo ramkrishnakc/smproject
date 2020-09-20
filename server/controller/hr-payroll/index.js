@@ -4,6 +4,6 @@ import payroll from './payroll.controller';
 
 const router = express.Router();
 router.post('/', hr.handleAdmission);
-router.gett('/', payroll.handleAdmission);
+router.get('/', payroll.handleAdmission);
 
 export default router;

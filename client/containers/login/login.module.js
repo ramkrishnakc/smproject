@@ -1,8 +1,8 @@
 import axios from 'axios';
 import {get} from 'lodash';
+import Util from '../../../common';
 
-const addPrefix = (actionType) => `Login/${actionType}`;
-
+const {addPrefix} = Util;
 const LOGIN_START = addPrefix('start_login');
 const LOGIN_SUCCESS = addPrefix('login_success');
 const LOGIN_FAILURE = addPrefix('login_failure');
