@@ -16,19 +16,19 @@ import MultiText from './multi-text';
 const simpleTypes = ['text', 'password', 'email', 'number'];
 
 const Field = (props) => {
-  const {type, title, style, className, error, ...rest} = props;
-  const propObj = {type, ...rest};
+  const {type, title, label, style, id, className, error, ...rest} = props;
+  const propObj = {type, id: id || props.name, ...rest};
 
   return (
     <div style={style} className={className}>
       {title && <p className="field-title">{title}</p>}
       <div className={`form-field ${error ? 'error' : ''}`}>
-        {props.label && (
-          <label htmlFor={props.id}>
-            {props.label}
-            <div className="required">
+        {label && (
+          <label htmlFor={id || props.name}>
+            {label}
+            <span className="required">
               {props.required && <FontAwesomeIcon icon="asterisk" />}
-            </div>
+            </span>
           </label>
         )}
         {simpleTypes.includes(type) && <SimpleInput {...propObj} />}
@@ -55,6 +55,7 @@ Field.defaultProps = {
   title: '',
   label: '',
   error: '',
+  id: '',
   required: false,
 };
 
@@ -64,7 +65,8 @@ Field.propTypes = {
   style: PropTypes.objectOf(PropTypes.any),
   title: PropTypes.string,
   error: PropTypes.string,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   required: PropTypes.bool,
 };

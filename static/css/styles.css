@@ -1,0 +1,9 @@
+@import url("fonts.css");
+
+.row {
+  max-width: 100% !important;
+}
+
+hr {
+  max-width: 100% !important;
+}

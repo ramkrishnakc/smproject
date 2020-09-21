@@ -12,6 +12,9 @@ if (prevStoredState === null) {
 }
 const store = CreateStore(prevStoredState);
 
+require('../static/css/foundation.css');
+require('../static/css/fonts.css');
+require('../static/css/styles.css');
 require('../static/scss/index.scss');
 
 ReactDOM.render(

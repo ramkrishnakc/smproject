@@ -1,24 +1,33 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 
-const TextArea = (props) => (
-  <textarea
-    rows={props.textareaRows}
-    style={props.inputStyle}
-    name={props.name}
-    id={props.id}
-    value={props.value}
-    disabled={props.disabled}
-    onChange={props.handler}
-    onBlur={(e) => {
-      e.target.value = e.target.value.trim();
-      props.handler(e);
-    }}
-    type={props.type}
-    placeholder={props.placeholder}
-    data-index={props.dataIndex}
-  />
-);
+const TextArea = (props) => {
+  const [value, setValue] = useState('');
+
+  useEffect(() => {
+    if (props.value || props.value === 0) {
+      setValue(props.value);
+    }
+  }, [props.value]);
+
+  return (
+    <textarea
+      rows={props.textareaRows}
+      style={props.inputStyle}
+      name={props.name}
+      id={props.id}
+      value={value}
+      disabled={props.disabled}
+      onChange={(e) => {
+        setValue(e.target.value);
+      }}
+      onBlur={() => props.handler(value.trim())}
+      type={props.type}
+      placeholder={props.placeholder}
+      data-index={props.dataIndex}
+    />
+  );
+};
 
 TextArea.defaultProps = {
   placeholder: '',

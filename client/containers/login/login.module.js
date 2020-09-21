@@ -2,12 +2,13 @@ import axios from 'axios';
 import {get} from 'lodash';
 import Util from '../../../common';
 
+const prefix = 'Login';
 const {addPrefix} = Util;
-const LOGIN_START = addPrefix('start_login');
-const LOGIN_SUCCESS = addPrefix('login_success');
-const LOGIN_FAILURE = addPrefix('login_failure');
-const TOGGLE_SIDEBAR = addPrefix('toggle_sidebar');
-const SESSION_EXPIRED = addPrefix('invalid_session');
+const LOGIN_START = addPrefix(prefix, 'start_login');
+const LOGIN_SUCCESS = addPrefix(prefix, 'login_success');
+const LOGIN_FAILURE = addPrefix(prefix, 'login_failure');
+const TOGGLE_SIDEBAR = addPrefix(prefix, 'toggle_sidebar');
+const SESSION_EXPIRED = addPrefix(prefix, 'invalid_session');
 
 const INITIAL_STATE = {
   isLoggedIn: false,
@@ -18,6 +19,7 @@ const INITIAL_STATE = {
   sidebarCollapsed: false,
 };
 
+/* ----------------------- Helper funtions ------------------- */
 const clearLocalStorage = (dispatch) => {
   localStorage.removeItem('reduxState');
   return dispatch({type: SESSION_EXPIRED});
