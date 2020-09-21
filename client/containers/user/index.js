@@ -12,6 +12,11 @@ const itemsList = [
     link: '/users/manage',
     icon: 'users-cog',
   },
+  {
+    label: 'Stats',
+    link: '/users/stats',
+    icon: 'chart-bar',
+  },
 ];
 
 const User = () => <PageList itemsList={itemsList} />;

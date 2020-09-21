@@ -1,7 +1,4 @@
 import Dashboard from '../containers/dashboard';
-import User from '../containers/user';
-import CreateUser from '../containers/user/create';
-import ManageUser from '../containers/user/manage';
 import NotFound from '../containers/404';
 import Profile from '../containers/profile';
 
@@ -13,9 +10,20 @@ import Fee from '../containers/fee';
 import Homework from '../containers/homework';
 import Hr from '../containers/hr';
 import Leave from '../containers/leave';
+
+import AddBook from '../containers/library/create';
+import AvailableBooks from '../containers/library/manage';
+import PersonalStats from '../containers/library/personal-stats';
+import LibraryStats from '../containers/library/library-stats';
 import Library from '../containers/library';
+
 import Notice from '../containers/notice';
 import Payroll from '../containers/payroll';
+
+import CreateUser from '../containers/user/create';
+import ManageUser from '../containers/user/manage';
+import UserStats from '../containers/user/stats';
+import User from '../containers/user';
 
 const getRouteProps = (path, component, exact) => ({
   path,
@@ -41,11 +49,12 @@ const getBreadCrumb = (parents, label, pageName) => {
       title: `Go to ${item.label} page`,
     });
   });
-  breadCrumb.push({label, title: `You are at ${pageName} page`});
+  breadCrumb.push({label, title: `You are at ${pageName || label} page`});
   return breadCrumb;
 };
 
-const userAsParent = [{label: 'Users', path: '/users'}];
+const userArr = [{label: 'Users', path: '/users'}];
+const libArr = [{label: 'Library', path: '/library'}];
 
 // This list is for the routes in UI
 const modules = [
@@ -67,12 +76,12 @@ const modules = [
   },
   {
     routeProps: getRouteProps('/attendance', Attendance, true),
-    ...getSidebar('attendance', 'Attendance', ['far', 'clock']),
+    ...getSidebar('attendance', 'Attendance', 'clock'),
     roles: ['admin', 'root'],
   },
   {
     routeProps: getRouteProps('/calendar', Calendar, true),
-    ...getSidebar('calendar', 'Calendar', ['far', 'calendar-alt']),
+    ...getSidebar('calendar', 'Calendar', 'calendar-alt'),
     roles: ['admin', 'root'],
   },
   {
@@ -95,11 +104,37 @@ const modules = [
     ...getSidebar('leave', 'Leave', 'user-clock'),
     roles: ['admin', 'root'],
   },
+  /** *---------------------- * Library * -------------------* */
+  {
+    routeProps: getRouteProps('/library/add', AddBook, true),
+    breadCrumb: getBreadCrumb(libArr, 'Add Book'),
+    name: 'add-book',
+    roles: ['admin'],
+  },
+  {
+    routeProps: getRouteProps('/library/list', AvailableBooks, true),
+    breadCrumb: getBreadCrumb(libArr, 'Available Books'),
+    name: 'list-book',
+    roles: ['admin'],
+  },
+  {
+    routeProps: getRouteProps('/library/personal-stats', PersonalStats, true),
+    breadCrumb: getBreadCrumb(libArr, 'Personal Stats'),
+    name: 'personal-stats',
+    roles: ['admin'],
+  },
+  {
+    routeProps: getRouteProps('/library/lib-stats', LibraryStats, true),
+    breadCrumb: getBreadCrumb(libArr, 'Stats'),
+    name: 'lib-stats',
+    roles: ['admin'],
+  },
   {
     routeProps: getRouteProps('/library', Library, true),
     ...getSidebar('library', 'Library', 'book-reader'),
     roles: ['admin', 'root'],
   },
+  /** */
   {
     routeProps: getRouteProps('/notice', Notice, true),
     ...getSidebar('notice', 'Notice', 'exclamation-circle'),
@@ -112,15 +147,21 @@ const modules = [
   },
   /** *---------------------- * Users * -------------------* */
   {
+    routeProps: getRouteProps('/users/create', CreateUser, true),
+    breadCrumb: getBreadCrumb(userArr, 'Create', 'Create Users'),
+    name: 'create-user',
+    roles: ['admin'],
+  },
+  {
     routeProps: getRouteProps('/users/manage', ManageUser, true),
-    breadCrumb: getBreadCrumb(userAsParent, 'Manage', 'Manage Users'),
+    breadCrumb: getBreadCrumb(userArr, 'Manage', 'Manage Users'),
     name: 'manage-user',
     roles: ['admin'],
   },
   {
-    routeProps: getRouteProps('/users/create', CreateUser, true),
-    breadCrumb: getBreadCrumb(userAsParent, 'Manage', 'Manage Users'),
-    name: 'create-user',
+    routeProps: getRouteProps('/users/stats', UserStats, true),
+    breadCrumb: getBreadCrumb(userArr, 'Stats', 'User Stats'),
+    name: 'user-stats',
     roles: ['admin'],
   },
   {

@@ -76,7 +76,8 @@
     "rimraf": "^3.0.2",
     "spdy": "^4.0.2",
     "webpack-dev-middleware": "^3.7.2",
-    "webpack-hot-middleware": "^2.25.0"
+    "webpack-hot-middleware": "^2.25.0",
+    "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",

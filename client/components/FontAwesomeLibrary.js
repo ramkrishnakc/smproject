@@ -30,6 +30,7 @@ import {
   faGift,
   faWrench,
   faEye,
+  faEyeSlash,
   faHistory,
   faChevronRight as fasChevronRight,
   faChevronDown as fasChevronDown,
@@ -45,14 +46,18 @@ import {
   faUsersCog,
   faUserClock,
   faPeopleCarry,
+  faBookMedical,
+  faChartBar,
+  faChartLine,
+  faListAlt,
+  faCalendarAlt,
+  faClock,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faSquare,
   faCircle,
   faCopy,
   faClone,
-  faClock,
-  faCalendarAlt,
 } from '@fortawesome/free-regular-svg-icons';
 
 const initFontAwesomeLibrary = () => {
@@ -85,6 +90,7 @@ const initFontAwesomeLibrary = () => {
     faGift,
     faWrench,
     faEye,
+    faEyeSlash,
     faHistory,
     fasChevronRight,
     fasChevronDown,
@@ -107,6 +113,10 @@ const initFontAwesomeLibrary = () => {
     faUsersCog,
     faUserClock,
     faPeopleCarry,
+    faBookMedical,
+    faListAlt,
+    faChartBar,
+    faChartLine,
   ].forEach((icon) => {
     library.add(icon);
   });
