@@ -28,7 +28,7 @@ const schema = [
     required: true,
   },
   {
-    type: 'text',
+    type: 'date',
     name: 'published_date',
     label: 'Published Date',
     required: true,
@@ -40,10 +40,9 @@ const schema = [
     textareaRows: 4,
   },
   {
-    type: 'text',
+    type: 'file',
     name: 'image',
     label: 'Image',
-    required: true,
   },
 ];
 export class Create extends React.Component {
@@ -57,6 +56,10 @@ export class Create extends React.Component {
     });
   };
 
+  fileHandler = () => (files) => {
+    console.log(files);
+  };
+
   render() {
     return (
       <>
@@ -65,7 +68,12 @@ export class Create extends React.Component {
             {schema.map((item) => {
               const value = get(this.props, ['form', item.name]);
               return (
-                <Input {...item} value={value} handler={this.handler(item)} />
+                <Input
+                  {...item}
+                  value={value}
+                  handler={this.handler(item)}
+                  fileHandler={this.fileHandler(item)}
+                />
               );
             })}
           </Form>

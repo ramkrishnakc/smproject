@@ -52,6 +52,7 @@ import {
   faListAlt,
   faCalendarAlt,
   faClock,
+  faFileImage,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faSquare,
@@ -117,6 +118,7 @@ const initFontAwesomeLibrary = () => {
     faListAlt,
     faChartBar,
     faChartLine,
+    faFileImage,
   ].forEach((icon) => {
     library.add(icon);
   });

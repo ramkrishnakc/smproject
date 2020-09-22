@@ -12,8 +12,9 @@ import Radio from './radio';
 import Checkbox from './checkbox';
 import CheckboxMultiselect from './checkbox-multi-select';
 import MultiText from './multi-text';
+import FileUpload from './fileUpload';
 
-const simpleTypes = ['text', 'password', 'email', 'number'];
+const simpleTypes = ['text', 'password', 'email', 'number', 'date'];
 
 const Field = (props) => {
   const {type, title, label, style, id, className, error, ...rest} = props;
@@ -43,6 +44,7 @@ const Field = (props) => {
           <CheckboxMultiselect {...propObj} />
         )}
         {type === 'multi-text' && <MultiText {...propObj} />}
+        {type === 'file' && <FileUpload {...propObj} />}
       </div>
       {error && <div className="error">{error}</div>}
     </div>
