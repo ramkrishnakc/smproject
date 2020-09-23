@@ -13,30 +13,100 @@ $placeholder-color: rgb(169, 169, 169);
     }
   }
   .form-field-wrapper {
-    .required {
-      margin-left: 3px;
-      font-size: 8px;
-      color: $required-color;
-    }
-    .label {
-      font-size: 13px;
-      color: $label-color;
-    }
-    input,
-    textarea {
-      font-size: 14px;
-      color: $text-color;
-      background: $bg-color;
-      resize: none;
-      outline: none;
-      border:none;
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
-      box-shadow: none;
-      &::placeholder {
-        font-size: 12px;
-        color: $placeholder-color;
-      } 
+    .form-field{
+      .required {
+        margin-left: 3px;
+        font-size: 8px;
+        color: $required-color;
+      }
+      .label {
+        font-size: 13px;
+        color: $label-color;
+      }
+      input,
+      textarea {
+        font-size: 14px;
+        color: $text-color;
+        background: $bg-color;
+        resize: none;
+        outline: none;
+        border:none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        &::placeholder {
+          font-size: 12px;
+          color: $placeholder-color;
+        } 
+      }
+
+      .radio {
+        display: inline-flex;
+        padding: 10px 0px;
+        margin: 0px;
+        li {
+          float: left;
+          list-style-type: none;
+          padding: 0px 10px;
+        }
+        .radio-label-text {
+          font-size: 13px;
+        }
+      }
+
+      .Select {
+        margin-bottom: 20px;
+        outline:none;
+        
+        .Select__control {
+          outline:none;
+          height: 35px;
+          border: none;
+          border-radius: 0px;
+          box-shadow: none;
+          background: $bg-color;
+          cursor: pointer;
+
+          .Select__value-container {
+            height: 35px;
+            padding: 0px;
+            .Select__placeholder {
+              font-size: 14px;
+              top: 57%;
+              padding-left: 10px;
+              color: $placeholder-color;
+            }
+            .Select__input {
+              font-size: 14px;
+              padding-left: 10px;
+            }
+          }
+
+          .Select__indicators {
+            height: 35px;
+            .Select__indicator-separator {
+              display: none;
+            }
+            .Select__indicator {
+              color: $text-color;
+            }
+          }
+        }
+        .Select__menu {
+          margin: 0px;
+          padding: 0px;
+          border: 1px solid #eff0f3;
+          border-radius: 0px;
+          box-shadow: none;
+          outline:none;
+          // .select__menu-list {}
+          .Select__option {
+            padding: 5px 10px;
+            margin: 0px;
+            font-size: 13px;
+          }
+        }
+      }
     }
   }
 }

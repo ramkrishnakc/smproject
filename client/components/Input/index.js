@@ -7,8 +7,8 @@ import TextArea from './text-area';
 import PasswordStrength from './password-with-strength';
 import PasswordWithIcon from './password-with-icon';
 import Select from './select';
-import MultiSelect from './multi-select';
 import Radio from './radio';
+import BooleanCheckbox from './boolean-checkbox';
 import Checkbox from './checkbox';
 import CheckboxMultiselect from './checkbox-multi-select';
 import MultiText from './multi-text';
@@ -37,8 +37,8 @@ const Field = (props) => {
         {type === 'password-with-strength' && <PasswordStrength {...propObj} />}
         {type === 'password-with-icon' && <PasswordWithIcon {...propObj} />}
         {type === 'select' && <Select {...propObj} />}
-        {type === 'multi-select' && <MultiSelect {...propObj} />}
         {type === 'radio' && <Radio {...propObj} />}
+        {type === 'boolean-checkbox' && <BooleanCheckbox {...propObj} />}
         {type === 'checkbox' && <Checkbox {...propObj} />}
         {type === 'checkbox-multi-select' && (
           <CheckboxMultiselect {...propObj} />

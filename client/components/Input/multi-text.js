@@ -30,7 +30,7 @@ const MultipleText = (props) => {
           ))}
         </ul>
       )}
-      <div className="relative-div-for-enter-button">
+      <div className="multilist-input-wrapper">
         <input
           className="multilist-input"
           name={props.name}

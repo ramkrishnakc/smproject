@@ -7,6 +7,7 @@ import BarBottom from '../../components/BarBottom';
 import Form from '../../components/Form';
 import Input from '../../components/Input';
 import {updateForm} from './library.module';
+import Option from './options';
 
 const schema = [
   {
@@ -22,9 +23,36 @@ const schema = [
     required: true,
   },
   {
-    type: 'text',
+    type: 'radio',
+    name: 'type',
+    label: 'Book Type',
+    placeholder: 'Select Book Type',
+    options: Option.BOOK_TYPES,
+    required: true,
+  },
+  {
+    type: 'select',
     name: 'category',
     label: 'Category',
+    optionKeys: 'form.type',
+    placeholder: 'Select Book Type before selecting Book Category',
+    options: (item) => {
+      if (typeof item === 'string') {
+        return Option.BOOK_CATEGORIES[item];
+      }
+      if (item && item.value) {
+        return Option.BOOK_CATEGORIES[item.value];
+      }
+      return [];
+    },
+    required: true,
+  },
+  {
+    type: 'select',
+    name: 'language',
+    label: 'Language',
+    placeholder: 'Select Language for Book',
+    options: Option.BOOK_LANGUAGES,
     required: true,
   },
   {
@@ -60,6 +88,10 @@ export class Create extends React.Component {
     console.log(files);
   };
 
+  selectHandler = () => (e) => {
+    console.log(e);
+  };
+
   render() {
     return (
       <>
@@ -73,6 +105,12 @@ export class Create extends React.Component {
                   value={value}
                   handler={this.handler(item)}
                   fileHandler={this.fileHandler(item)}
+                  selectHandler={this.selectHandler(item)}
+                  options={
+                    typeof item.options === 'function'
+                      ? item.options(get(this.props, item.optionKeys))
+                      : item.options
+                  }
                 />
               );
             })}

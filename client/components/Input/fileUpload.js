@@ -4,14 +4,14 @@ import FontAwesomeIcon from '../FontAwesomeLibrary';
 
 // Handle file upload
 const handleFiles = (
-  inputObject = {},
+  inputObject,
   maxFiles,
   maxSize,
   allowedExtensions,
   fileHandler,
   setFileName
 ) => {
-  const {files} = inputObject;
+  const {files} = inputObject || {};
   const len = files && files.length;
 
   if (len && len <= maxFiles) {
@@ -38,14 +38,14 @@ const handleFiles = (
       return true;
     });
 
-    if (!allow) {
+    if (allow) {
       fileHandler(files);
-      setFileName(filename);
+      return setFileName(filename);
     }
-    return null;
+    return allow;
   }
   /* Display error here - maxFile exceeds */
-  return null;
+  return false;
 };
 
 const NativeUpload = (props) => {

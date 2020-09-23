@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Radio = (props) => (
   <ul className="radio">
-    {props.items.map((item) => {
+    {props.options.map((item) => {
       let label = item;
       let value = item;
 
@@ -37,13 +37,13 @@ Radio.defaultProps = {
   valueKey: 'value',
   disabled: false,
   value: '',
-  items: [],
+  options: [],
 };
 
 Radio.propTypes = {
   labelKey: PropTypes.string,
   valueKey: PropTypes.string,
-  items: PropTypes.arrayOf(PropTypes.any),
+  options: PropTypes.arrayOf(PropTypes.any),
   disabled: PropTypes.bool,
   name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
