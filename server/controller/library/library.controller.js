@@ -1,5 +1,17 @@
-const handleAdmission = () => {};
+const getBookById = () => {};
+const addBook = () => {};
+const editBookById = () => {};
+const deleteBookById = () => {};
+const getBookslist = () => {};
+const getRecords = () => {};
+const editRecords = () => {};
 
 export default {
-  handleAdmission,
+  getBookById,
+  addBook,
+  editBookById,
+  deleteBookById,
+  getBookslist,
+  getRecords,
+  editRecords,
 };

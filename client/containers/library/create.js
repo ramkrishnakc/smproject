@@ -63,7 +63,7 @@ const schema = [
   },
   {
     type: 'text-area',
-    name: 'descreption',
+    name: 'description',
     label: 'Description',
     textareaRows: 4,
   },
