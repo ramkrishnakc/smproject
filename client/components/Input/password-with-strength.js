@@ -12,7 +12,7 @@ const PasswordStrength = (props) => {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    if (props.value) {
+    if (props.value && props.value !== password) {
       setPassword(props.value);
     }
   }, [props.value]);
@@ -54,10 +54,9 @@ const PasswordStrength = (props) => {
           setPassword(pwd);
           setScore(resultScore);
         }}
-        onBlur={(e) => {
-          e.target.value = e.target.value.trim();
+        onBlur={() => {
           if (isValid && typeof props.handler === 'function') {
-            props.handler(e);
+            props.handler(password);
           }
         }}
       />

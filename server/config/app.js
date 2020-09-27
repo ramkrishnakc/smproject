@@ -3,6 +3,7 @@ import path from 'path';
 const rootPath = path.normalize(`${__dirname}/../../`);
 const publicPath = path.join(rootPath, 'dist');
 const serverPath = path.join(rootPath, 'server');
+const uploadDirectory = path.join(rootPath, 'uploads');
 const indexHtmlPath = path.join(publicPath, 'index.html');
 
 const certDirectory =
@@ -20,4 +21,8 @@ export default {
   logDirectory,
   schemaDirectory,
   dbName,
+  uploadPaths: [
+    path.join(uploadDirectory, 'books'),
+    path.join(uploadDirectory, 'users'),
+  ],
 };

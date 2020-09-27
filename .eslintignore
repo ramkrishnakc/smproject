@@ -3,3 +3,4 @@ static
 server/certs
 package-lock.json
 dist
+uploads

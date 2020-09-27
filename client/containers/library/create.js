@@ -6,24 +6,28 @@ import {get} from 'lodash';
 import BarBottom from '../../components/BarBottom';
 import Form from '../../components/Form';
 import Input from '../../components/Input';
-import {updateForm} from './library.module';
+import {updateForm, submitForm} from './library.module';
 import Option from './options';
+import Validate from '../../../common/validation';
 
 const schema = [
   {
     type: 'text',
+    validation_type: 'string',
     name: 'name',
     label: 'Name',
     required: true,
   },
   {
     type: 'text',
+    validation_type: 'string',
     name: 'author',
     label: 'Author',
     required: true,
   },
   {
     type: 'radio',
+    validation_type: 'string',
     name: 'type',
     label: 'Book Type',
     placeholder: 'Select Book Type',
@@ -32,6 +36,7 @@ const schema = [
   },
   {
     type: 'select',
+    validation_type: 'string',
     name: 'category',
     label: 'Category',
     optionKeys: 'form.type',
@@ -49,6 +54,7 @@ const schema = [
   },
   {
     type: 'select',
+    validation_type: 'string',
     name: 'language',
     label: 'Language',
     placeholder: 'Select Language for Book',
@@ -56,16 +62,25 @@ const schema = [
     required: true,
   },
   {
+    type: 'number',
+    validation_type: 'integer',
+    name: 'quantity',
+    label: 'Available Quantity',
+    required: true,
+  },
+  {
     type: 'date',
+    validation_type: 'date',
     name: 'published_date',
     label: 'Published Date',
     required: true,
   },
   {
     type: 'text-area',
+    validation_type: 'string',
     name: 'description',
     label: 'Description',
-    textareaRows: 4,
+    textareaRows: 3,
   },
   {
     type: 'file',
@@ -74,8 +89,29 @@ const schema = [
   },
 ];
 export class Create extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      errors: {},
+      files: null,
+    };
+  }
+
   submit = () => {
-    console.log('Submit Value');
+    const errors = Validate(this.props.form, {schema});
+
+    if (errors.valid) {
+      this.setState({errors: {}});
+      const formData = new FormData();
+      formData.append('data', JSON.stringify(this.props.form));
+
+      if (this.state.files && this.state.files.length) {
+        formData.append('file', this.state.files[0]);
+      }
+
+      return this.props.submitForm(formData);
+    }
+    return this.setState({errors});
   };
 
   handler = (item) => (value) => {
@@ -84,12 +120,8 @@ export class Create extends React.Component {
     });
   };
 
-  fileHandler = () => (files) => {
-    console.log(files);
-  };
-
-  selectHandler = () => (e) => {
-    console.log(e);
+  fileHandler = (files) => {
+    this.setState({files});
   };
 
   render() {
@@ -104,13 +136,14 @@ export class Create extends React.Component {
                   {...item}
                   value={value}
                   handler={this.handler(item)}
-                  fileHandler={this.fileHandler(item)}
-                  selectHandler={this.selectHandler(item)}
+                  fileHandler={this.fileHandler}
+                  selectHandler={this.handler(item)}
                   options={
                     typeof item.options === 'function'
                       ? item.options(get(this.props, item.optionKeys))
                       : item.options
                   }
+                  error={this.state.errors[item.name]}
                 />
               );
             })}
@@ -127,7 +160,9 @@ export class Create extends React.Component {
 }
 
 Create.propTypes = {
+  submitForm: PropTypes.func.isRequired,
   updateForm: PropTypes.func.isRequired,
+  form: PropTypes.shape().isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -137,6 +172,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     updateForm: (data) => dispatch(updateForm(data)),
+    submitForm: (data) => dispatch(submitForm(data)),
   };
 };
 

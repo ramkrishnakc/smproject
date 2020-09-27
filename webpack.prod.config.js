@@ -13,6 +13,11 @@ module.exports = {
     publicPath: '/',
     filename: '[name].js',
   },
+  resolve: {
+    alias: {
+      joi: 'joi-browser',
+    },
+  },
   target: 'web',
   devtool: '#source-map',
   // Webpack 4 does not have a CSS minifier, although

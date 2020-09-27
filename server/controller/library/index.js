@@ -2,8 +2,10 @@ import express from 'express';
 import library from './library.controller';
 
 const router = express.Router();
-router.get('/', library.getBookslist);
 router.post('/', library.addBook);
+
+/* ------------------------------------------- */
+router.get('/', library.getBookslist);
 router.put('/', library.editBookById);
 router.get('/:id', library.getBookById);
 router.delete('/:id', library.deleteBookById);

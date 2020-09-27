@@ -16,36 +16,35 @@ const handleFiles = (
 
   if (len && len <= maxFiles) {
     let filename = '';
-    // Check if file is allowed to upload
-    const allow = files.every((file) => {
+    let errMessage = '';
+    let idx = 0;
+
+    do {
+      const file = files[idx];
       const ext = file.name.split('.').pop();
       const size = (file.size / (1024 * 1024)).toFixed(4);
 
       if (size > maxSize) {
-        /* Display file size exceeds error here */
-        return false;
-      }
-      if (!allowedExtensions.includes(`.${ext}`)) {
-        /* Display file extension not allowed error here */
-        return false;
-      }
-
-      if (filename) {
-        filename += `${filename}, ${file.name}`;
+        idx += len;
+        errMessage = `${file.name} size exceeds ${maxSize}mb`;
+      } else if (!allowedExtensions.includes(`.${ext}`)) {
+        idx += len;
+        errMessage = `Only ${allowedExtensions.join(',')} files are allowed`;
       } else {
-        filename = file.name;
+        idx += 1;
+        filename = filename ? `${filename}, ${file.name}` : file.name;
       }
-      return true;
-    });
+    } while (idx < len);
 
-    if (allow) {
+    if (!errMessage) {
       fileHandler(files);
-      return setFileName(filename);
+      setFileName(filename);
+      return null;
     }
-    return allow;
+    // Display the error message
+    return errMessage;
   }
-  /* Display error here - maxFile exceeds */
-  return false;
+  return `Only ${maxFiles} file is allowed`;
 };
 
 const NativeUpload = (props) => {

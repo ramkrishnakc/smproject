@@ -72,7 +72,9 @@ const login = (req, res) => {
               .catch((err) =>
                 sendErrorResponse({
                   res,
-                  logMsg: `Couldn't create session for ${username} : ${err}`,
+                  logMsg: `Couldn't create session for ${username} : ${
+                    err && err.message
+                  }`,
                 })
               );
           }

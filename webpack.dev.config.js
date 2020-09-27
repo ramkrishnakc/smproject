@@ -23,6 +23,11 @@ module.exports = {
     publicPath: '/',
     filename: '[name].js',
   },
+  resolve: {
+    alias: {
+      joi: 'joi-browser',
+    },
+  },
   mode: 'development',
   target: 'web',
   devtool: '#source-map',

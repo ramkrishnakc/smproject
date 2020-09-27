@@ -5,10 +5,11 @@ import fs from 'fs';
 
 import createDB, {insertUser} from './system';
 import config from './config';
+import {mkDirByPathSync} from './controller/helper';
 
 const {
   logger,
-  app: {certDirectory},
+  app: {certDirectory, uploadPaths},
 } = config;
 const env = process.env.NODE_ENV || 'development';
 const serverConfig = config.server[env];
@@ -66,6 +67,7 @@ const SERVER = {
     const routes = require('./routes').default; // eslint-disable-line global-require
     routes(app); // Configure routes
 
+    uploadPaths.forEach((uploadPath) => mkDirByPathSync(uploadPath)); // create file upload paths if needed
     createHTTPServer(); // start HTTP server
     createHTTPsServer(); // Finally start HTTPS server
   },

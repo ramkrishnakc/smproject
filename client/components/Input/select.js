@@ -1,25 +1,46 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
 
-const SelectInput = (props) => (
-  <Select
-    classNamePrefix={props.className}
-    className={props.className}
-    disabled={props.disabled}
-    id={props.id}
-    name={props.name}
-    placeholder={props.placeholder}
-    labelKey={props.labelKey}
-    valueKey={props.valueKey}
-    value={props.value}
-    options={props.options.map((option) =>
-      typeof option === 'string' ? {label: option, value: option} : option
-    )}
-    onChange={props.selectHandler}
-    multi={props.multi}
-  />
-);
+const SelectInput = (props) => {
+  const [value, setValue] = useState(null);
+
+  useEffect(() => {
+    if (props.value && props.value !== value) {
+      setValue(props.value);
+    }
+  }, [props.value]);
+
+  const options = props.options.map((option) =>
+    typeof option === 'string' ? {label: option, value: option} : option
+  );
+
+  return (
+    <Select
+      classNamePrefix={props.className}
+      className={props.className}
+      disabled={props.disabled}
+      id={props.id}
+      name={props.name}
+      placeholder={props.placeholder}
+      value={
+        typeof value === 'string'
+          ? options.filter((option) => {
+              return option[props.valueKey] === value;
+            })
+          : value
+      }
+      labelKey={props.labelKey}
+      valueKey={props.valueKey}
+      options={options}
+      onChange={(val) => {
+        setValue(val);
+        props.selectHandler(val && val[props.valueKey]);
+      }}
+      multi={props.multi}
+    />
+  );
+};
 
 SelectInput.defaultProps = {
   className: 'Select',

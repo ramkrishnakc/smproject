@@ -1,21 +1,28 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '../FontAwesomeLibrary';
 
 const PasswordWithIcon = (props) => {
+  const [password, setPassword] = useState('');
   const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (props.value && props.value !== password) {
+      setPassword(props.value);
+    }
+  }, [props.value]);
 
   return (
     <div className="password-with-icon-wrapper">
       <input
         name={props.name}
         id={props.id}
-        value={props.value}
+        value={password}
         disabled={props.disabled}
-        onBlur={(e) => {
-          e.target.value = e.target.value.trim();
-          props.handler(e);
+        onChange={(e) => {
+          setPassword(e.target.value);
         }}
+        onBlur={() => props.handler(password.trim())}
         type={show === true ? 'text' : 'password'}
         placeholder={props.placeholder}
         data-index={props.dataIndex}

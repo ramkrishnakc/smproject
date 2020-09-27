@@ -46,7 +46,7 @@ const Field = (props) => {
         {type === 'multi-text' && <MultiText {...propObj} />}
         {type === 'file' && <FileUpload {...propObj} />}
       </div>
-      {error && <div className="error">{error}</div>}
+      {error && <div className="error-text">{error}</div>}
     </div>
   );
 };

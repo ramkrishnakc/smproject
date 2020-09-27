@@ -7,12 +7,13 @@ $placeholder-color: rgb(169, 169, 169);
 .form-wrapper {
   background: white;
   padding: 30px 20px 20px 20px;
-  .error {
-    input, textarea {
-      border: 1px solid $required-color;
-    }
-  }
   .form-field-wrapper {
+    .error-text {
+      font-size: 14px;
+      margin-bottom: 15px;
+      margin-top: -15px;
+      color: #D55B76;
+    }
     .form-field{
       .required {
         margin-left: 3px;
@@ -40,6 +41,7 @@ $placeholder-color: rgb(169, 169, 169);
         } 
       }
 
+      // Radio button CSS
       .radio {
         display: inline-flex;
         padding: 10px 0px;
@@ -52,15 +54,21 @@ $placeholder-color: rgb(169, 169, 169);
         .radio-label-text {
           font-size: 13px;
         }
+        input {
+          cursor: pointer;
+          height: 10px;
+          width: 10px;
+        }
       }
 
+      // React-select css
       .Select {
         margin-bottom: 20px;
         outline:none;
         
         .Select__control {
           outline:none;
-          height: 35px;
+          height: 39px;
           border: none;
           border-radius: 0px;
           box-shadow: none;
@@ -68,22 +76,30 @@ $placeholder-color: rgb(169, 169, 169);
           cursor: pointer;
 
           .Select__value-container {
-            height: 35px;
+            height: 39px;
             padding: 0px;
+            position:static;
             .Select__placeholder {
-              font-size: 14px;
+              font-size: 13px;
               top: 57%;
-              padding-left: 10px;
+              padding: 5px 10px;
               color: $placeholder-color;
             }
             .Select__input {
-              font-size: 14px;
-              padding-left: 10px;
+              font-size: 13px;
+              padding: 5px 10px 5px 7px;
+              color: $text-color;
+            }
+            .Select__single-value {
+              font-size: 13px;
+              top: 50%;
+              left: 1.2%;
+              color: $text-color;
             }
           }
 
           .Select__indicators {
-            height: 35px;
+            height: 39px;
             .Select__indicator-separator {
               display: none;
             }
@@ -99,6 +115,7 @@ $placeholder-color: rgb(169, 169, 169);
           border-radius: 0px;
           box-shadow: none;
           outline:none;
+          // color: $text-color;
           // .select__menu-list {}
           .Select__option {
             padding: 5px 10px;

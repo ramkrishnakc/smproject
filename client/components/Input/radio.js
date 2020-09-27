@@ -13,17 +13,17 @@ const Radio = (props) => (
       }
 
       return (
-        <li key={value}>
+        <li key={label}>
           <input
             type={props.type}
-            id={props.id}
+            id={label}
             name={props.name}
             value={value}
             checked={props.value === value}
-            onChange={props.handler}
+            onChange={(e) => props.handler(e.target.value)}
             disabled={props.disabled}
           />
-          <label htmlFor={props.id}>
+          <label htmlFor={label}>
             <div className="radio-label-text">{label} </div>
           </label>
         </li>
@@ -46,7 +46,6 @@ Radio.propTypes = {
   options: PropTypes.arrayOf(PropTypes.any),
   disabled: PropTypes.bool,
   name: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   handler: PropTypes.func.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, null]),

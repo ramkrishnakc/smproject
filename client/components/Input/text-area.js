@@ -5,7 +5,7 @@ const TextArea = (props) => {
   const [value, setValue] = useState('');
 
   useEffect(() => {
-    if (props.value || props.value === 0) {
+    if (props.value && props.value !== value) {
       setValue(props.value);
     }
   }, [props.value]);
