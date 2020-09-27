@@ -9,6 +9,7 @@ export default {
   s_book_type: {type: String, required: true},
   s_book_category: {type: String, required: true},
   s_book_language: {type: String, required: true},
+  s_book_quantity: {type: Number, required: true},
   s_book_published_date: {type: String, required: true},
   s_book_description: {type: String},
   s_book_image: {type: String},

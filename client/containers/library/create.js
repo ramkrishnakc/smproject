@@ -3,6 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {get} from 'lodash';
 
+import Loading from '../../components/Loading';
 import BarBottom from '../../components/BarBottom';
 import Form from '../../components/Form';
 import Input from '../../components/Input';
@@ -81,6 +82,7 @@ const schema = [
     name: 'description',
     label: 'Description',
     textareaRows: 3,
+    validate: true,
   },
   {
     type: 'file',
@@ -98,7 +100,9 @@ export class Create extends React.Component {
   }
 
   submit = () => {
-    const errors = Validate(this.props.form, {schema});
+    const errors = Validate(this.props.form, {
+      schema,
+    });
 
     if (errors.valid) {
       this.setState({errors: {}});
@@ -125,6 +129,9 @@ export class Create extends React.Component {
   };
 
   render() {
+    if (this.props.loading) {
+      return <Loading />;
+    }
     return (
       <>
         <div className="cloumn large-6 medium-6 small-12">
@@ -163,10 +170,12 @@ Create.propTypes = {
   submitForm: PropTypes.func.isRequired,
   updateForm: PropTypes.func.isRequired,
   form: PropTypes.shape().isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   form: state.library.create,
+  loading: state.library.formSubmissionStarted,
 });
 
 const mapDispatchToProps = (dispatch) => {

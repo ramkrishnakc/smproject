@@ -24,7 +24,7 @@ const INITIAL_STATE = {
   formSubmissionStarted: false,
 };
 
-/* -------------------------- Login actions ------------------ */
+/* -------------------------- Library actions ------------------ */
 export const updateForm = (payload) => {
   return (dispatch) => dispatch({type: UPDATE_FORM_FIELD, payload});
 };
@@ -35,7 +35,7 @@ export const submitForm = (payload) => {
     return axios
       .post('/smapi/library', payload, {})
       .then((res) => {
-        if (get(res, 'data.succes')) {
+        if (get(res, ['data', 'success'])) {
           return dispatch({type: SUBMIT_FORM_SUCCESS});
         }
         return dispatch({type: SUBMIT_FORM_FAILURE});

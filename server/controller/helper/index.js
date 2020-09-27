@@ -29,6 +29,9 @@ export const getErrorObject = (code, message, logMsg) => {
     case 404:
       errorObject.message = 'Request Not Found';
       break;
+    case 405:
+      errorObject.message = 'Method Not Allowed';
+      break;
     case 412:
       errorObject.message = 'Precondition failed';
       break;

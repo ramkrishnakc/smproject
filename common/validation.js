@@ -164,8 +164,10 @@ const validate = (data, options) => {
   const miniSchema = {};
 
   options.schema.forEach((item) => {
-    const joiSchema = getJoiSchema(item);
-    miniSchema[item.name] = joiSchema;
+    if (item.required || item.validate) {
+      const joiSchema = getJoiSchema(item);
+      miniSchema[item.name] = joiSchema;
+    }
   });
 
   const Schema = Joi.object().keys({
