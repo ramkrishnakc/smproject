@@ -1,3 +1,7 @@
+import mongoose from 'mongoose';
+
+const {Schema} = mongoose;
+
 export default {
   s_book_name: {
     type: String,
@@ -15,18 +19,12 @@ export default {
   s_book_image: {type: String},
   s_created_date: {type: String, default: new Date().toISOString()},
   s_status: {type: Array, default: 'available'},
-  s_book_history_records: {
-    type: Array,
-    default: [
-      {
-        s_history_id: {type: String},
-        s_requested_by: {type: String, required: true},
-        s_requested_date: {type: String, required: new Date().toISOString()},
-        s_issued_by: {type: String},
-        s_issued_date: {type: String},
-        s_returned_accepted_by: {type: String},
-        s_returned_date: {type: String},
-      },
-    ],
-  },
+  s_book_history_records: new Schema({
+    s_requested_by: {type: String},
+    s_requested_date: {type: String},
+    s_issued_by: {type: String},
+    s_issued_date: {type: String},
+    s_returned_accepted_by: {type: String},
+    s_returned_date: {type: String},
+  }),
 };
