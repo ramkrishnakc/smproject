@@ -10,8 +10,8 @@ This is a private repository. A school management project.
   # Starting the project
   - git clone https://github.com/ramkrishnakc/smproject.git (Clone the project)
   - Mongo DB should be up and running before starting the project
-  - sudo npm install (root permission is required, 'sudo' is not required in windows)
-  - sudo npm run rundev (This command will run the project, 'sudo' is not required in windows)
+  - npm install (root permission might be required, use 'sudo' if needed.)
+  - npm run rundev (root permission might be required, use 'sudo' if needed.)
   - Go to browser and 'https://localhost:8443'
   - Username: root_user | Password: changeme
 
@@ -19,3 +19,5 @@ This is a private repository. A school management project.
   - Create a git branch
   - Work and make changes in your branch
   - Then, send pull request to 'master' branch from your working branch
+
+#NOTE: Https certs should be placed in proper location, not in the project.
